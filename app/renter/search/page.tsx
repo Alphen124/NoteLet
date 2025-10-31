@@ -1,9 +1,9 @@
 /* eslint-disable max-lines */
 "use client";
 
-import React from "react";
-import styled from "styled-components";
-import { useRouter } from "next/navigation"; // ✅ ใช้สำหรับเปลี่ยนหน้า
+import React from 'react';
+import styled from 'styled-components';
+import { useRouter } from 'next/navigation';
 
 // --------------------------------------------------
 // SVG Logo
@@ -26,19 +26,18 @@ const LogoIcon = () => (
 );
 
 // --------------------------------------------------
-// Styled Components
+// Header Section
 // --------------------------------------------------
-
-// หน้า Home การเช่า
-const HomeRentPageContainer = styled.div`
+const SearchPageContainer = styled.div`
   position: relative;
   width: 100%;
   max-width: 1920px;
-  min-height: 100vh;
+  height: 100vh;
   margin: 0 auto;
   background: #ffffff;
-  overflow-x: hidden;
 `;
+//overflow: hidden;
+
 
 // Header
 const Header = styled.header`
@@ -185,25 +184,24 @@ const LoginButton = styled.button`
 `;
 
 // --------------------------------------------------
-// Section: Renting Service
+// Search Content Section
 // --------------------------------------------------
-const TestimonialSection = styled.section`
+const SearchResultSection = styled.section`
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  padding: clamp(100px, 15vh, 140px) 5%;
-  gap: 64px;
-  width: 100%;
+  padding-top: 160px;
+  height: calc(100vh - 92px);
   box-sizing: border-box;
-  margin-top: 92px;
+  gap: 40px;
 `;
 
 const Title = styled.h1`
-  width: 100%;
-  font-family: "Inter";
+  font-family: 'Inter';
   font-weight: 700;
-  font-size: 56px;
+  font-size: 64px;
   line-height: 1.2;
   text-align: center;
   color: #212529;
@@ -212,84 +210,139 @@ const Title = styled.h1`
 
 const Content = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
   justify-content: center;
+  align-items: flex-start;
   gap: 32px;
-  width: 100%;
   flex-wrap: nowrap;
-  overflow-x: auto;
-  padding: 0 40px;
 `;
 
-const ClientCard = styled.div`
-  flex: 1;
-  min-width: 280px;
-  max-width: 400px;
+// --------------------------------------------------
+// Card Components
+// --------------------------------------------------
+const SearchCardBase = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 60px 40px;
-  gap: 60px;
-  background: #ffffff;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  &:hover {
-    transform: translateY(-5px);
-  }
-`;
-
-const ImageContainer = styled.div`
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  background: #cce5ff;
-  border-radius: 8px;
-`;
-
-const NameBox = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 36px;
-`;
-
-const ItemName = styled.h3`
-  width: 100%;
-  height: 36px;
-  font-family: "Inter";
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 36px;
-  display: flex;
   align-items: center;
+  padding: 32px 24px;
+  gap: 24px;
+  width: 370px;
+  height: 420px;
+  border-radius: 10px;
+  box-sizing: border-box;
+`;
+
+const SearchCardWhite = styled(SearchCardBase)`
+  background: #ffffff;
+  box-shadow: 15px 10px 50px rgba(0, 0, 0, 0.1);
+  cursor: pointer; 
+`;
+
+const SearchCardBlue = styled(SearchCardBase)`
+  background: #4f9cf9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer; /* ✅ 1. เพิ่ม cursor */
+`;
+
+const CardImage = styled.div`
+  width: 100%;
+  height: 188px;
+  background: #c4defd;
+  border-radius: 6px;
+`;
+
+const CardCommentSection = styled.div`
+  width: 100%;
+  border-bottom: 1px solid #212529;
+  padding-bottom: 12px;
+  font-family: 'Inter';
+  font-weight: 700;
+  font-size: 22px;
   text-align: center;
-  justify-content: center;
   color: #212529;
-  margin: 0;
+`;
+
+const CardCommentSectionBlue = styled(CardCommentSection)`
+  border-bottom: 1px solid #ffffff;
+  color: #ffffff;
+`;
+
+const AvatarBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+`;
+
+const Avatar = styled.div`
+  width: 80px;
+  height: 80px;
+  background: #d9d9d9;
+  border-radius: 50%;
+`;
+
+const LessorName = styled.div`
+  font-family: 'Inter';
+  font-weight: 600;
+  font-size: 20px;
+  color: #212529;
+`;
+
+const LessorNameBlue = styled(LessorName)`
+  color: #ffffff;
+`;
+
+// Slider
+const SliderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+`;
+
+const SliderDot = styled.div`
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+`;
+
+const DotActive = styled(SliderDot)`
+  background: #043873;
+`;
+
+const DotInactive = styled(SliderDot)`
+  background: #4f9cf9;
 `;
 
 // --------------------------------------------------
 // React Component
 // --------------------------------------------------
-const HomeRentPage: React.FC = () => {
+const SearchPage: React.FC = () => {
   const router = useRouter();
 
+  const handleLogoClick = () => {
+    router.push('/renter');
+  };
+
   const handleSearchClick = () => {
-    // 👇👇👇 แก้ไขจุดนี้ครับ 👇👇👇
-    router.push("/renter/search"); // ✅ เปลี่ยนหน้าไปที่ /app/renter/search/page.tsx
+    router.push('/renter/search');
+  };
+
+  const handleWhiteCardClick = () => {
+    router.push('/renter/renting');
+  };
+
+  // ✅ 2. เพิ่มฟังก์ชันนี้
+  const handleBlueCardClick = () => {
+    router.push('/renter/borrowing');
   };
 
   return (
-    <HomeRentPageContainer>
+    <SearchPageContainer>
       <Header>
-        <LogoContainer>
+        <LogoContainer onClick={handleLogoClick}>
           <LogoIcon />
           <LogoText>NOTELET</LogoText>
         </LogoContainer>
 
-        {/* ✅ onClick ถูกต้องแล้ว */}
         <SearchBar onClick={handleSearchClick}>
           <SearchIcon />
           <SearchText>Search</SearchText>
@@ -313,31 +366,48 @@ const HomeRentPage: React.FC = () => {
         </RightNavContainer>
       </Header>
 
-      <TestimonialSection>
-        <Title>Renting Service</Title>
+      <SearchResultSection>
+        <Title>Search Result</Title>
         <Content>
-          <ClientCard>
-            <ImageContainer />
-            <NameBox>
-              <ItemName>Notebook</ItemName>
-            </NameBox>
-          </ClientCard>
-          <ClientCard>
-            <ImageContainer />
-            <NameBox>
-              <ItemName>Tablet</ItemName>
-            </NameBox>
-          </ClientCard>
-          <ClientCard>
-            <ImageContainer />
-            <NameBox>
-              <ItemName>Others</ItemName>
-            </NameBox>
-          </ClientCard>
+
+          <SearchCardWhite onClick={handleWhiteCardClick}>
+            <CardImage />
+            <CardCommentSection>Device Name Price</CardCommentSection>
+            <AvatarBox>
+              <Avatar />
+              <LessorName>Lessor Name</LessorName>
+            </AvatarBox>
+          </SearchCardWhite>
+
+          {/* ✅ 3. เพิ่ม onClick ที่นี่ */}
+          <SearchCardBlue onClick={handleBlueCardClick}>
+            <CardImage />
+            <CardCommentSectionBlue>Device Name</CardCommentSectionBlue>
+            <AvatarBox>
+              <Avatar />
+              <LessorNameBlue>ComSci, KMITL</LessorNameBlue>
+            </AvatarBox>
+          </SearchCardBlue>
+
+          {/* ✅ 3. เพิ่ม onClick ที่นี่ */}
+          <SearchCardBlue onClick={handleBlueCardClick}>
+            <CardImage />
+            <CardCommentSectionBlue>Device Name</CardCommentSectionBlue>
+            <AvatarBox>
+              <Avatar />
+              <LessorNameBlue>ComSci, KMITL</LessorNameBlue>
+            </AvatarBox>
+          </SearchCardBlue>
         </Content>
-      </TestimonialSection>
-    </HomeRentPageContainer>
+
+        <SliderContainer>
+          <DotInactive />
+          <DotActive />
+          <DotInactive />
+        </SliderContainer>
+      </SearchResultSection>
+    </SearchPageContainer>
   );
 };
 
-export default HomeRentPage;
+export default SearchPage;

@@ -314,7 +314,7 @@ const HomeRentPage: React.FC = () => {
       </Header>
 
       <TestimonialSection>
-        <Title>Renting Service</Title>
+        <Title>Borrowing Service</Title>
         <Content>
           <ClientCard>
             <ImageContainer />
