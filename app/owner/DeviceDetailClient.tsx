@@ -56,7 +56,7 @@ export default function DeviceDetailClient({ device, related }: { device: Device
           <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.35)" }} onClick={close} />
 
           <div style={{ width: 680, background: "#fff", borderRadius: 8, boxShadow: "0 10px 30px rgba(2,6,23,0.2)", padding: 20, zIndex: 70 }}>
-            <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700 }}>รีวิวผู้ใช้ได้เลยจ๊ะแต่รีวิวแย่มึงเจอกู</h3>
+            <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700 }}>รีวิวผู้ใช้</h3>
             <div style={{ height: 1, background: "#e6e9ef", margin: "12px 0 18px" }} />
 
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>

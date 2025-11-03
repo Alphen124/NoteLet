@@ -11,7 +11,7 @@ export default async function DeviceDetail({ params }: Props) {
     id,
     name: `Device ${id}`,
     price: "$15/day",
-    lesseeName: "ไอ้เหี้ยนัท",
+    lesseeName: "Nut",
     avatar: "/vercel.svg",
   };
 
@@ -20,7 +20,7 @@ export default async function DeviceDetail({ params }: Props) {
     id: `${id}-2`,
     name: `Related ${id}`,
     price: "$10/day",
-    lesseeName: "ไอ้เหี้ยแต้งค์",
+    lesseeName: "Thank",
     avatar: "/vercel.svg",
   };
 
@@ -29,7 +29,7 @@ export default async function DeviceDetail({ params }: Props) {
     id: `${id}-3`,
     name: `Related ${id}`,
     price: "$10/day",
-    lesseeName: "ไอ้เหี้ยเมฆ",
+    lesseeName: "Mek",
     avatar: "/vercel.svg",
   };
 
